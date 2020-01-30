@@ -1,0 +1,64 @@
+﻿@model ProjektTitsOI.Models.Gospodarstwo
+
+@{
+    ViewBag.Title = "DodajGospodarstwo";
+}
+<br />
+<div>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index","Home")'">Wróć do spisu gospodarstw</button>
+</div>
+<h2>Dodaj Gospodarstwo</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ApplicationUser)
+    @Html.HiddenFor(model => model.UserId)
+
+
+
+<div class="form-horizontal">
+    
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.Label("Nazwa Gospodarstwa")
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NazwaGospodarstwa, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NazwaGospodarstwa, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.Label("Liczba Osób")
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LiczbaOsob, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LiczbaOsob, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.Label("Liczba Paneli")
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LiczbaPaneli, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LiczbaPaneli, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.Label("Nazwa Miasta")
+    <div class="form-group">
+        <div class="col-md-10">
+            @*ViewBag.CityList is holding all the cities values*@
+            @Html.DropDownListFor(m => m.MiastoNazwa, (SelectList)ViewBag.NazwyMiast)
+            @Html.ValidationMessageFor(model => model.MiastoNazwa, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Dodaj Gospodarstwo" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+    }
+

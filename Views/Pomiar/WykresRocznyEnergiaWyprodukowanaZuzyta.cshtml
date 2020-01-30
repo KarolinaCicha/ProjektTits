@@ -1,0 +1,89 @@
+﻿@*<div id="chartContainer"></div>*@
+@*@{
+		int liczbapomiarow = Model.Count();
+		int[] x = new int[liczbapomiarow];
+		int[] y = new int[liczbapomiarow];
+		string[] tablica = new string[liczbapomiarow];
+		for (int i = 0; i < tablica.Length; i++)
+		{
+			x[i] = i + 1;
+			y[i] = Model[i];
+
+		}
+	}*@
+
+
+<script type="text/javascript">
+	var result = @Html.Raw(ViewBag.DataPoints);
+		var dataPoints =[];
+
+		for(var i = 0; i < result.length; i++){
+			dataPoints.push({ label:result[i].V,y:result[i].EnergiaWyprodukowana,});
+    }
+	var result = @Html.Raw(ViewBag.DataPoints);
+		var dataPoints2 =[];
+
+		for(var i = 0; i < result.length; i++){
+			dataPoints2.push({ label:result[i].V,y:result[i].EnergiaZuzyta,});
+		}
+
+
+	window.onload = function () {
+		var chart = new CanvasJS.Chart("chartContainer", {
+			animationEnabled: true,
+
+			title: {
+				text: "Wszystkie Pomiary dla Gospodarstwa"
+			},
+			axisX: {
+				interval: 1,
+				title: "Data"
+			},
+			axisY2: {
+				interlacedColor: "rgba(1,77,101,.2)",
+				gridColor: "rgba(1,77,101,.1)",
+				title: "Energia Wyprodukowana"
+			},
+			data: [{
+				type: "bar",
+				name: "daty",
+				axisYType: "secondary",
+				color: "#014D65",
+				dataPoints: dataPoints
+			}]
+        });
+		var chart2 = new CanvasJS.Chart("chartContainer2", {
+			animationEnabled: true,
+
+			title: {
+				text: "Wszystkie Pomiary dla Gospodarstwa"
+			},
+			axisX: {
+				interval: 1,
+				title: "Data"
+			},
+			axisY2: {
+				interlacedColor: "rgba(1,77,101,.2)",
+				gridColor: "rgba(1,77,101,.1)",
+				title: "Energia Zużyta"
+			},
+			data: [{
+				type: "bar",
+				name: "daty",
+				axisYType: "secondary",
+				color: "#014D65",
+				dataPoints: dataPoints2
+			}]
+        });
+		chart.render();
+		chart2.render();
+	};
+</script>
+<div>
+	<button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("Wykresy/{0}",ViewBag.GospodarstwoId), "Gospodarstwo")'">Powrót do wykresów</button>
+</div>
+<div>
+	<div id="chartContainer" style="width: 45%; height: 300px;display: inline-block;"></div>
+
+	<div id="chartContainer2" style="width: 45%; height: 300px;display: inline-block;"></div>
+</div>

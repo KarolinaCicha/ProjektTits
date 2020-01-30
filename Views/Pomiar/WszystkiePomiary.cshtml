@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Gospodarstwa";
+    
+}
+@model IEnumerable<ProjektTitsOI.Models.Pomiar>
+<h2>Pomiary</h2>
+<hr />
+<table class="table table-bordered table-responsive table-hover" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>Nazwa Gospodarstwa</th>
+        <th>EnergiaWyprodukowana</th>
+        <th>EnergiaZuzyta</th>
+        <th>Pogoda</th>
+    </tr>
+    @foreach (var pomiar in Model)
+    {
+        <tr>
+            <td>@pomiar.GospodarstwoId</td>
+            <td>@pomiar.EnergiaWyprodukowana</td>
+            <td>@pomiar.EnergiaZuzyta</td>
+            <td>@pomiar.Pogoda</td>
+        </tr>
+    }
+</table>

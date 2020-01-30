@@ -1,0 +1,28 @@
+﻿@model ProjektTitsOI.Models.Gospodarstwo
+
+@{
+    ViewBag.Title = "BrakPomiarow";
+}
+
+<h2>Brak Pomiarow dla tego Gospodarstwa</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+   
+</div>
+
+<div>
+    <h1> Jaką chcesz podjąć akcję?</h1>
+    <h2>Dodać pomiar do tego gospodarstwa</h2>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("DodajPomiarStrona/{0}",Model.GospodarstwoId), "pomiar")'">Dodaj nowy pomiar</button>
+    <h2>Wrócić do listy gospodarstw</h2>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Home")'">
+        Wróć
+    </button>
+
+
+</div>
+<p>
+    
+</p>

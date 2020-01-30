@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "SzczegolyGospodarstwa";
+}
+
+
+@model ProjektTitsOI.Models.Gospodarstwo
+    <br />
+    <div>
+        <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("StronaGospodarstwa/{0}",Model.GospodarstwoId), "Gospodarstwo")'">Wróć do strony gospodarstwa</button>
+    </div>
+<h2>Szczegóły Gospodarstwa: @Model.NazwaGospodarstwa</h2>
+<h4>Przejdź do trybu edycji:  <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("EdytujGospodarstwo/{0}",@Model.GospodarstwoId), "Gospodarstwo")'">Edytuj</button></h4>
+<table class="table table-bordered table-responsive table-hover" cellpadding="0" cellspacing="0" style="max-width: 550px;">
+    <tr>
+        <td>@Html.Label("Nazwa Gospodarstwa")</td>
+        <td>@Html.DisplayFor(model => model.NazwaGospodarstwa)</td>
+    </tr>
+    <tr>
+        <td>@Html.Label("Liczba osób")</td>
+        <td>@Html.DisplayFor(model => model.LiczbaOsob)</td>
+    </tr>
+    <tr>
+        <td> @Html.Label("Liczba Paneli")</td>
+        <td>@Html.DisplayFor(model => model.LiczbaPaneli)</td>
+    </tr>
+</table>
+
+
+    

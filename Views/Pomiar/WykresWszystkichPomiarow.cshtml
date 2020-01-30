@@ -1,0 +1,40 @@
+﻿
+<div id="chartContainer"></div>
+
+<script type="text/javascript">
+		var result = @Html.Raw(ViewBag.DataPoints);
+		var dataPoints =[];
+
+		for(var i = 0; i < result.length; i++){
+			dataPoints.push({label:result[i].V,y:result[i].EnergiaWyprodukowana});
+		}
+
+	window.onload = function () {
+		var chart = new CanvasJS.Chart("chartContainer",{
+			animationEnabled: true,
+
+			title: {
+				text: "Wszystkie Pomiary dla Gospodarstwa"
+			},
+			axisX: {
+				interval: 1,
+				title: "Data"
+			},
+			axisY2: {
+				interlacedColor: "rgba(1,77,101,.2)",
+				gridColor: "rgba(1,77,101,.1)",
+				title: "Energia Wyprodukowana"
+			},
+			data: [{
+				type: "bar",
+				name: "daty",
+				axisYType: "secondary",
+				color: "#014D65",
+				dataPoints: dataPoints
+			}]
+		});
+		chart.render();
+	};
+</script>
+
+<div id="chartContainer"></div>

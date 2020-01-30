@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "StronaGospodarstwa";
+}
+@model ProjektTitsOI.Models.Gospodarstwo
+<br />
+<div>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index","Home")'">Wróć do spisu gospodarstw</button>
+
+</div>
+<h2>Strona Gospodarstwa: @Model.NazwaGospodarstwa</h2>
+<section>
+    <nav>
+        <div style="border: 1px solid black; width: 90%; padding: 2px; margin-left: 15px;">
+            <h3 style="margin-left:15px;">Spis wszystkich zarejestrowanych pomiarów - dodawanie, edycja, usuwanie 
+            <button type="button" class="btn btn-primary" 
+                    onclick="location.href='@Url.Action(String.Format("WszystkiePomiaryDlaGospodarstwa/{0}",Model.GospodarstwoId), "Pomiar")'">Przejdź
+             </button></h3>
+        </div>
+        <br />
+        <div style="border: 1px solid black; width: 90%; padding: 2px; margin-left: 15px;">
+            <h3 style="margin-left:15px;">Szczegóły gospodarstwa: <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("SzczegolyGospodarstwa/{0}",Model.GospodarstwoId), "Gospodarstwo")'">Przejdź</button></h3>
+        </div>
+        <br />
+        <div style="border: 1px solid black; width: 90%; padding: 2px; margin-left: 15px;">
+            <h3 style="margin-left:15px;">Raporty - podsumowanie pomiarów: <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("StronaZRaportem/{0}",Model.GospodarstwoId), "Gospodarstwo")'">Przejdź</button></h3>
+        </div>
+        <br />
+        <div style="border: 1px solid black; width: 90%; padding: 2px; margin-left: 15px;">
+            <h3 style="margin-left:15px;">Wykresy <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("Wykresy/{0}",Model.GospodarstwoId), "Gospodarstwo")'">Przejdź</button></h3>
+        </div>
+        <br />
+        @*<div style="border: 1px solid black; width: 90%; padding: 2px; margin-left: 15px;">
+            <h3 style="margin-left:15px;">Wróć do spisu gospodarstw <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index","Home")'">Przejdź</button></h3>
+        </div>*@
+
+
+
+
+
+    </nav>
+</section>
+
+

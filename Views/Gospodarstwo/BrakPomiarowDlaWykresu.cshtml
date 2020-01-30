@@ -1,0 +1,28 @@
+﻿@model ProjektTitsOI.Models.Gospodarstwo
+
+@{
+    ViewBag.Title = "BrakPomiarow";
+}
+
+<h2> Nie można stworzyć wykresu ze względu na brak pomiarów</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+
+</div>
+
+<div>
+    <h1> Jaką chcesz podjąć akcję?</h1>
+    <h2>Dodać pomiar do tego gospodarstwa</h2>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("DodajPomiarStrona/{0}",Model.GospodarstwoId), "pomiar")'">Dodaj nowy pomiar</button>
+    <h2>Wrócić do strony gospodarstwa</h2>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("StronaGospodarstwa/{0}",Model.GospodarstwoId), "Gospodarstwo")'">
+        Wróć
+    </button>
+
+
+</div>
+<p>
+
+</p>

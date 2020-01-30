@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "DodajPomiarStrona";
+
+}
+
+@using ProjektTitsOI.Models
+@model ProjektTitsOI.Models.Pomiar
+
+<br />
+<div>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("WszystkiePomiaryDlaGospodarstwa/{0}", Model.GospodarstwoId), "Pomiar")'">Wróć do spisu pomiarów</button>
+</div>
+
+
+<h2>Dodawanie pomiaru</h2>
+<h4>Dodając pomiar wybierz odpowiednią date (rozwijąjąc strzałką kalendarz), wpisz energię wyprodukowaną i zużytą, a także wybierz z rozwijanego menu pogodę. Na koniec kliknij "Dodaj pomiar"</h4>
+
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.PomiarId)
+        @Html.HiddenFor(model => model.GospodarstwoId)
+
+        <div>
+            @Html.Label("Data [mm-dd-yyyy]")
+            <div class="form-group">
+                <div class="col-md-10">
+
+                    @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "datepicker", @Value = DateTime.Now.ToString("yyyy-MM-dd") } })
+                     @Html.ValidationMessageFor(model => model.Data, null, new { @class = "text-danger" })
+                    
+                </div>
+            </div>
+        </div>
+
+
+        <br />
+
+        <div>
+            @Html.Label("Energia Wyprodukowana [kWh]")
+            <div class="form-group">
+
+                <div class="col-md-10">
+
+                    @Html.EditorFor(model => model.EnergiaWyprodukowana, new { htmlAttributes = new { @class = "form-control" }})
+                    @Html.ValidationMessageFor(model=>model.EnergiaWyprodukowana, null, new { @class = "text-danger"})
+                </div>
+            </div>
+        </div>
+        <br />
+        <div>
+            @Html.Label("Energia Zużyta [kWh]")
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EnergiaZuzyta, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EnergiaZuzyta, null, new { @class = "text-danger" })
+
+                </div>
+            </div>
+        </div>
+        <br />
+
+
+        <div>
+            @Html.Label("Pogoda")
+            <div class="form-group">
+
+
+                <div class="col-md-10">
+                    @*ViewBag.CityList is holding all the cities values*@
+                    @Html.DropDownListFor(m => m.Pogoda, (SelectList)ViewBag.OpisyPogodyList)
+                    @Html.ValidationMessageFor(model => model.Pogoda, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" formmethod="post" class="btn btn-primary" value="Dodaj pomiar" />
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+}
+
+
+
+
+
+
+
+
+

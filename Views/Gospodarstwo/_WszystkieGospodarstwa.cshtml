@@ -1,0 +1,58 @@
+﻿
+
+@{
+    ViewBag.Title = "WszystkieGospodarstwa";
+}
+@model dynamic
+<h2>Spis wszystkich gospodarstw</h2>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+Jeśli chcesz dodać nowe gospodarstwo:
+<button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("DodajGospodarstwo", "Gospodarstwo")'">Dodaj Gospodarstwo</button>
+<hr />
+@section scripts
+{
+    <script type="text/javascript" charset="utf8">
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
+}
+
+<table id="table_id" class="table table-bordered table-responsive table-hover" cellpadding="0" cellspacing="0" align="center">
+    <thead>
+        <tr>
+
+            <th>Nazwa Gospodarstwa</th>
+            <th>Liczba Osób</th>
+            <th>Liczba Paneli</th>
+            <th>Nazwa Miasta </th>
+            <th>Przejdź do strony</th>
+            <th>Usuń</th>
+            <th>Edytuj</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var gospodarstwo in Model)
+        {
+            <tr>
+
+                <td>@gospodarstwo.NazwaGospodarstwa</td>
+                <td>@gospodarstwo.LiczbaOsob</td>
+                <td>@gospodarstwo.LiczbaPaneli</td>
+                <td>@gospodarstwo.MiastoNazwa</td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("StronaGospodarstwa/{0}",gospodarstwo.GospodarstwoId), "Gospodarstwo")'">Przejdz do strony gospodarstwa</button>
+                </td>
+                <td> <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("UsunGospodarstwo/{0}",@gospodarstwo.GospodarstwoId), "Gospodarstwo")'">Usuń</button></td>
+                <td><button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("EdytujGospodarstwo/{0}",gospodarstwo.GospodarstwoId), "Gospodarstwo")'">Edytuj</button></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

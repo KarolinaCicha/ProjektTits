@@ -1,0 +1,56 @@
+﻿@model ProjektTitsOI.Models.Pomiar
+
+@{
+    ViewBag.Title = "UsunPomiar";
+}
+<br />
+<div>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("WszystkiePomiaryDlaGospodarstwa/{0}", Model.GospodarstwoId), "Pomiar")'">Wróć do spisu pomiarów</button>
+</div>
+<h2>Usuń Pomiar</h2>
+
+<h3>Jesteś pewny, że chcesz usunąć poniższy pomiar?</h3>
+<div>
+    <h4>Pomiar</h4>
+    <hr />
+    <table class="table table-bordered table-responsive table-hover" cellpadding="0" cellspacing="0">
+        
+        <tr>
+            <td> @Html.Label("Data")</td>
+            <td>
+                @{var zmienna = Model.Data.ToString("MM/dd/yyyy"); } @Html.DisplayFor(model => zmienna)
+            </td>
+        </tr>
+        <tr>
+            <td> @Html.Label("Energia Wyprodukowana [kWh]")</td>
+            <td> @Html.DisplayFor(model => model.EnergiaWyprodukowana)</td>
+        </tr>
+        <tr>
+            <td> @Html.Label("Energia Zużyta [kWh]")</td>
+            <td> @Html.DisplayFor(model => model.EnergiaZuzyta)</td>
+        </tr>
+        <tr>
+            <td> @Html.Label("Długość dnia")</td>
+            @{var zmienna3 = Model.Dlugoscdnia.ToString("F"); }
+            <td>  @Html.DisplayFor(model => zmienna3)</td>
+        </tr>
+        <tr>
+            <td> @Html.Label("Pogoda")</td>
+            <td> @Html.DisplayFor(model => model.Pogoda)</td>
+        </tr>
+    </table>
+    
+
+    @using (Html.BeginForm())
+    {
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.GospodarstwoId)
+        @Html.HiddenFor(model => model.PomiarId)
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-primary" />
+           
+        </div>
+    }
+</div>

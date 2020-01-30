@@ -1,0 +1,11 @@
+﻿@model ProjektTitsOI.Models.Pomiar
+<h2>Data poza zakresem</h2>
+<h3>Musisz podać datę z zakresu 01.01.2000 i 01.01.2200</h3>
+
+<div>
+    <h2>Wróć do edycji pomiaru</h2>
+    
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("EdytujPomiar/{0}",@Model.PomiarId), "pomiar")'">Edytuj</button>
+
+</div>
+

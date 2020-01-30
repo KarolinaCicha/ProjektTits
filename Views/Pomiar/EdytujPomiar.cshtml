@@ -1,0 +1,73 @@
+﻿@model ProjektTitsOI.Models.Pomiar
+
+@{
+    ViewBag.Title = "EdytujPomiar";
+}
+<br />
+<div>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("WszystkiePomiaryDlaGospodarstwa/{0}", Model.GospodarstwoId), "Pomiar")'">Wróć do spisu pomiarów</button>
+</div>
+<h2>Edytuj Pomiar</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Pomiar</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.PomiarId)
+        @Html.HiddenFor(model => model.GospodarstwoId)
+        @Html.HiddenFor(model => model.Dlugoscdnia)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Data, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "datepicker", @Value = Model.Data.ToString("yyyy-MM-dd") } })
+                @Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EnergiaWyprodukowana, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EnergiaWyprodukowana, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EnergiaWyprodukowana, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EnergiaZuzyta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EnergiaZuzyta, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EnergiaZuzyta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pogoda, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="col-md-10">
+                @*ViewBag.CityList is holding all the cities values*@
+                @Html.DropDownListFor(m => m.Pogoda, (SelectList)ViewBag.OpisyPogodyList)
+                @Html.ValidationMessageFor(model => model.Pogoda, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" formmethod="post" value="Zapisz" class="btn btn-primary"/>
+            </div>
+        </div>
+
+    </div>
+}
+
+

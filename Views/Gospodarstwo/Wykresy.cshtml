@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Wykresy";
+}
+@using ProjektTitsOI.Models
+@model ProjektTitsOI.Models.Raport
+<h2>Wykresy</h2>
+<div>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("StronaGospodarstwa/{0}",Model.GospodarstwoId), "Gospodarstwo")'">Wróć do strony gospodarstwa</button>
+</div>
+<br />
+<div>
+    <div style="border: 1px solid black; width: 90%; padding: 2px; margin-left: 15px;">
+        <h3 style="margin-left:15px;">
+            Wykres pomiarów energii wyprodukowanej <button type="button" class="btn btn-primary"
+                                                           onclick="location.href =
+        '@Url.Action(String.Format("WykresWszystkichPomiarow/{0}",Model.GospodarstwoId), "Pomiar")'">
+               Przejdź
+            </button>
+        </h3>
+    </div>
+    <br />
+    <div style="border: 1px solid black; width: 90%; padding: 2px; margin-left: 15px;">
+        <h3 style="margin-left:15px;">
+            Wykres pomiarów energii zużytej <button type="button" class="btn btn-primary"
+        onclick="location.href =
+        '@Url.Action(String.Format("WykresWszystkichPomiarowEnergiaZuzyta/{0}",Model.GospodarstwoId), "Pomiar")'">
+    Przejdź
+</button>
+        </h3>
+    </div>
+</div>
+
+
+
+<h2>Wykresy roczny</h2>
+<h3>Wybierz rok dla któych chcesz zobaczyć wykresy produkcji i zużycia energii</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.GospodarstwoId)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Rok, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Rok, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Rok, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <div style="border: 1px solid black; width: 90%; padding: 2px; margin-left: 15px;">
+        <h3 style="margin-left:15px;">
+            Wykresy roczne <input type="submit" formmethod="post" class="btn btn-primary" value="  Przejdź" />
+
+        </h3>
+
+    </div>
+
+    @*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+
+                <input type="submit" formmethod="post" class="btn btn-primary" value="Wykres Roczny" />
+            </div>
+        </div>*@
+
+}
+
+
+
+@*<input type="submit" formmethod="post" value="Save" class="btn btn-default" />*@
+
+@* <input type="submit" formmethod="post" value="Wykres Roczny" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("WykresRocznyEnergiaWyprodukowana/{0}/{1}", Model.GospodarstwoId, Model.Rok), "Pomiar")'" />
+    </div>*@
+@*<button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("WykresRocznyEnergiaWyprodukowana/{0}/{1}",Model.GospodarstwoId,Model.Rok), "Pomiar")'">Wykres Wszystkich dodanych pomiarow energi wyprodukowanej</button>
+    </div>*@

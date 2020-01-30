@@ -1,0 +1,68 @@
+﻿@model ProjektTitsOI.Models.Pomiar
+
+@{
+    ViewBag.Title = "PowtarzajacaSieData";
+}
+
+<h2>Już masz zarejestrowany pomiar dla tej daty</h2>
+
+<div>
+    <h4>Pomiar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Gospodarstwo.NazwaGospodarstwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gospodarstwo.NazwaGospodarstwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnergiaWyprodukowana)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnergiaWyprodukowana)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnergiaZuzyta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnergiaZuzyta)
+        </dd>
+
+     
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pogoda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pogoda)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <h1> Jaką chcesz podjąć akcję?</h1>
+    <h2>Edytować już istniejący pomiar</h2>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("EdytujPomiar/{0}",Model.PomiarId), "pomiar")'">Edytuj</button>
+    <h2>Wrócić do dodawania pomiaru</h2>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("DodajPomiarStrona/{0}",@Model.GospodarstwoId), "Pomiar")'">
+        Dodaj pomiar
+    </button>
+
+</div>
+

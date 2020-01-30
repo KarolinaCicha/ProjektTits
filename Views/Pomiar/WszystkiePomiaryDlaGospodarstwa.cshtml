@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "Gospodarstwa";
+    ViewBag.listapomiarow = "listapomiarow";
+}
+@model dynamic
+    <br />
+    <div>
+        <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("StronaGospodarstwa/{0}",ViewBag.IdGospodarstwa), "Gospodarstwo")'">Wróć do strony gospodarstwa</button>
+
+    </div>
+<h2>Pomiary dla gospodarstwa</h2>
+
+<button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("DodajPomiarStrona/{0}", ViewBag.IdGospodarstwa), "Pomiar")'">Dodaj pomiar</button>
+<hr />
+<hr />
+@section scripts
+{
+    <script type="text/javascript" charset="utf8">
+
+        jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+            "date-us-pre": function (a) {
+                if (a == null || a == "") {
+                    return 0;
+                }
+                var ukDatea = a.split('/');
+                return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+            },
+
+            "date-us-asc": function (a, b) {
+                return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+            },
+
+            "date-us-desc": function (a, b) {
+                return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+            }
+        });
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                "columnDefs": [
+                    { "orderable": false, "targets": [6] },
+                    { type: 'date-us', targets: 0 },
+
+                ]
+            });
+        });
+    </script>
+}
+<table id="table_id" class="table table-bordered table-responsive table-hover" cellpadding="0" cellspacing="0">
+    <thead>
+        <tr>
+
+            <th>Data</th>
+            <th>Energia Wyprodukowana [kWh]</th>
+            <th>Energia Zużyta [kWh]</th>
+            <th>Saldo Dnia [kWh]</th>
+            <th>Pogoda</th>
+            <th>Długość dnia [h]</th>
+            <th>Edytuj/Usuń</th>
+
+        </tr>
+    </thead>
+    <tbody>
+      
+        @foreach (var pomiar in Model)
+
+        {
+           
+            var dlugoscdniawsekundach = (int)(@pomiar.Dlugoscdnia * 3600);
+            var resztazgodzin = dlugoscdniawsekundach % 3600; //reszta z godzin
+            var calegodzinywsekundach = dlugoscdniawsekundach - resztazgodzin;
+
+            var godziny =calegodzinywsekundach/3600;
+            var resztazminut = resztazgodzin % 60;
+            var caleminutywsekundach = resztazgodzin - resztazminut;
+
+            var minuty = caleminutywsekundach/60;
+            var sekundy = resztazgodzin % 60;
+            var dlugoscdniaTekst =godziny+"h "+minuty+"min "+ sekundy+ "sek" ;
+
+            var saldo = pomiar.EnergiaWyprodukowana - pomiar.EnergiaZuzyta;
+            <tr>
+
+                <td>@pomiar.Data.ToString("MM\\/dd\\/yyyy")</td>
+                <td>@pomiar.EnergiaWyprodukowana</td>
+                <td>@pomiar.EnergiaZuzyta</td>
+                <td>@saldo</td>
+                <td>@pomiar.Pogoda</td>
+                @*<td>@pomiar.Dlugoscdnia.ToString("F")</td>*@
+                <td>@dlugoscdniaTekst</td>
+                <td>
+
+                    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("EdytujPomiar/{0}",@pomiar.PomiarId), "pomiar")'">Edytuj</button> |
+                    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("UsunPomiar/{0}",@pomiar.PomiarId), "pomiar")'">Usun</button>
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("StronaGospodarstwa/{0}",ViewBag.IdGospodarstwa), "Gospodarstwo")'">Wróć do strony gospodarstwa</button>
+
+

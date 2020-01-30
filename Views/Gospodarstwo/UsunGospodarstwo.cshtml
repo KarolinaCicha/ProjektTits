@@ -1,0 +1,61 @@
+﻿@model ProjektTitsOI.Models.Gospodarstwo
+
+@{
+    ViewBag.Title = "UsunGospodarstwo";
+}
+
+<br />
+<div>
+    <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index","Home")'">Wróć do spisu gospodarstw</button>
+</div>
+
+
+<h2>Usunięcie gospodarstwa</h2>
+
+<h3>Jesteś pewien, że chcesz usunąć to gospodarstwo?</h3>
+<div>
+    <table class="table table-bordered table-responsive table-hover" cellpadding="0" cellspacing="0">
+
+        <tr>
+            <td> @Html.Label("Nazwa Gospodarstwa")</td>
+            <td>
+                @Html.DisplayFor(model => model.NazwaGospodarstwa)
+            </td>
+        </tr>
+        <tr>
+            <td> @Html.Label("Liczba osób")</td>
+            <td>
+                @Html.DisplayFor(model => model.LiczbaOsob)
+            </td>
+        </tr>
+        <tr>
+            <td> @Html.Label("Liczba Paneli")</td>
+            <td>
+                @Html.DisplayFor(model => model.LiczbaPaneli)
+            </td>
+        </tr>
+        <tr>
+            <td> @Html.Label("Miasto")</td>
+            <td>
+                @Html.DisplayFor(model => model.MiastoNazwa)
+</tr>
+    </table>
+    <hr />
+    
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.GospodarstwoId)
+        @Html.HiddenFor(model => model.LiczbaOsob)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.LiczbaPaneli)
+        @Html.HiddenFor(model => model.NazwaGospodarstwa)
+        @Html.HiddenFor(model => model.MiastoId)
+        @Html.HiddenFor(model => model.MiastoNazwa)
+        <div class="form-actions no-color">
+            <input type="submit" formmethod="post" value="Usuń" class="btn btn-primary" />
+
+        </div>
+    }
+</div>

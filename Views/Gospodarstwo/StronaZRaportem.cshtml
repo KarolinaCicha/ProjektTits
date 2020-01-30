@@ -1,0 +1,126 @@
+﻿@model ProjektTitsOI.Models.Raport
+
+@{
+    ViewBag.Title = "StronaZRaportem";
+}
+<br />
+    <div>
+        <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action(String.Format("StronaGospodarstwa/{0}",Model.GospodarstwoId), "Gospodarstwo")'">Wróć do strony gospodarstwa</button>
+    </div>
+
+<h2>Strona z raportem</h2>
+@Html.HiddenFor(model => model.GospodarstwoId)
+<div>
+    <h4>Raport</h4>
+    <table class="table table-bordered table-responsive table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Liczba zarejestrowanych dni</td>
+            <td> @Html.DisplayFor(model => model.LiczbaZarejestrowaychDni)</td>
+        </tr>
+        <tr>
+            <td>Liczba dni pochmurnych</td>
+            <td>@Html.DisplayFor(model => model.LiczbaDniPochmurnych)</td>
+        </tr>
+        <tr>
+            <td>Liczba dni z częściowym zachmurzeniem</td>
+            <td>@Html.DisplayFor(model => model.LiczbaDniZCzesciowymZachmurzeniem)</td>
+        </tr>
+        <tr>
+            <td>Liczba dni z zachmurzeniem całkowitym</td>
+            <td>@Html.DisplayFor(model => model.LiczbaDniBezchmurnych)</td>
+        </tr>
+        <tr>
+            <td>Średnia pomiarów energii Zużytej</td>
+            <td> @Html.DisplayFor(model => model.SredniaWszystkichPomiarowEnergiaZuzyta)</td>
+        </tr>
+        <tr>
+            @{var zmienna = Model.SredniaWszystkichPomiarowEnergiaWyprodukowana.ToString("F");}
+            <td>Średnia pomiarów energii Wyprodukowanej przez panele</td>
+            <td> @Html.DisplayFor(model => zmienna)</td>
+        </tr>
+
+        <tr>
+            @{var zmienna2 = Model.SredniaWszystkichPomiarowEnergiaZuzyta.ToString("F");}
+            <td>Średnia pomiarów energii Zuzytej</td>
+            <td> @Html.DisplayFor(model => zmienna2)</td>
+        </tr>
+
+        <tr>
+            <td>Najniższy zarejestrowany pomiar energii wyprodukowanej [Data]</td>
+            <td>@Html.DisplayFor(model => model.NajnizszyPomiarEnergiaWyprodukowana)   [Dnia: @Model.DataNajnizszegoPomiaruEnergiaWyprodukowana.ToString("yyyy-MM-dd")] </td>
+        </tr>
+        <tr>
+            <td>Najwyższy zarejestrowany pomiar energii wyprodukowanej [Data]</td>
+            <td> @Html.DisplayFor(model => model.NajwyzszyPomiarEnergiaWyprodukowana) [Dnia: @Model.DataNajwyzszegoPomiaruEnergiaWyprodukowana.ToString("yyyy-MM-dd"))]</td>
+        </tr>
+        <tr>
+            <td>Najniższy zarejestrowany pomiar energii zużytej [Data]</td>
+
+            <td> @Html.DisplayFor(model => model.NajnizszyPomiarEnergiaZuzyta) [Dnia: @Model.DataNajnizszegoPomiaruEnergiaZuzyta.ToString("yyyy-MM-dd"))]</td>
+        </tr>
+        <tr>
+            <td>Najwyższy zarejestrowany pomiar energii zużytej [Data]</td>
+            <td> @Html.DisplayFor(model => model.NajwyzszyPomiarEnergiaZuzyta) [Dnia: @Model.DataNajwyzszegoPomiaruEnergiaZuzyta.ToString("yyyy-MM-dd"))]</td>
+        </tr>
+        <tr>
+            <td>Liczba dni z saldem dodatnim</td>
+            <td>@Html.DisplayFor(model => model.LiczbaDniZSaldemDodatnim)</td>
+        </tr>
+        <tr>
+            <td>Liczba dni z saldem ujemnym</td>
+            <td>@Html.DisplayFor(model => model.LiczbaDniZSaldemUjemnym)</td>
+        </tr>
+        <tr>
+            <td>Całkowita energia wyprodukowana</td>
+            <td>@Html.DisplayFor(model => model.CalaEnergiaWyprodukowana)</td>
+        </tr>
+        <tr>
+            <td>Całkowita energia Zużyta</td>
+            <td>@Html.DisplayFor(model => model.CalaEnergiaZuzyta)</td>
+        </tr>
+        <tr>
+            <td>Saldo całościowe</td>
+            <td>@Html.DisplayFor(model => model.CaleSaldo)</td>
+        </tr>
+        <tr>
+            @{var zmienna3 = Model.SrednieProdukcjaNaGodzine.ToString("F"); }
+            <td>Średnia produkcja na godzinę</td>
+            <td>@Html.DisplayFor(model => zmienna3)</td>
+        </tr>
+        <tr>
+            @{ var zmienna4 = Model.SrednieZuzycieNaGodzine.ToString("F");}
+            <td>Średnie zużycie na godzinę</td>
+            <td>@Html.DisplayFor(model => zmienna4)</td>
+        </tr>
+
+        <tr>
+            @{var zmienna5 = Model.SredniaEnergiaWyprodukowanaNaOsobe.ToString("F"); }
+            <td>Średnia produkcja energii na Osobę</td>
+            <td>@Html.DisplayFor(model => zmienna5)</td>
+        </tr>
+        <tr>
+            @{var zmienna6 = Model.SredniaEnergiaZuzytaNaOsobe.ToString("F"); }
+            <td>Średnie zużycie energii na Osobę</td>
+            <td>@Html.DisplayFor(model => zmienna6)</td>
+        </tr>
+        <tr>
+            @{var zmienna7 = Model.SredniaEnergiaWyprodukowanaNaPanele.ToString("F"); }
+            <td>Średnia produkcja na jedną panele</td>
+            <td>@Html.DisplayFor(model => zmienna7)</td>
+        </tr>
+        <tr>
+            @{ var zmienna8 = Model.SredniaEnergiaWyprodukowanaNaPaneleNagodzine.ToString("F");}
+            <td>Średnie produkcja jednej paneli na godzinę</td>
+            <td>@Html.DisplayFor(model => zmienna8)</td>
+        </tr>
+
+    </table>
+
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+
+</div>
